@@ -1,12 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 
 import { Wrapper, Container, Logo, BasketContainer, ItemCount } from './styles';
 
-function Header({ navigation, cartSize }) {
+const Header = ({ navigation }) => {
+  const cartSize = useSelector(state => state.cart.length);
   return (
     <Wrapper>
       <Container>
@@ -20,13 +21,10 @@ function Header({ navigation, cartSize }) {
       </Container>
     </Wrapper>
   );
-}
+};
 
 Header.propTypes = {
   navigation: PropTypes.shape.isRequired,
-  cartSize: PropTypes.number.isRequired,
 };
 
-export default connect(state => ({
-  cartSize: state.cart.length,
-}))(Header);
+export default Header;
